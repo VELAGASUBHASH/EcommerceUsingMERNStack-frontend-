@@ -20,7 +20,8 @@
     "@vitejs/plugin-react": "^4.4.1",
     "lottie-react": "^2.4.1",
     "zustand": "^4.3.8",
-    "lucide-react": "^0.277.0"
+    "lucide-react": "^0.277.0",
+    "framer-motion": "^10.12.16"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
