@@ -25,7 +25,7 @@ const Navbar = () => {
           to="/"
           className="text-2xl font-semibold tracking-tight hover:opacity-80 transition-opacity"
         >
-          CodeKart
+          NodeKart
         </Link>
 
 
