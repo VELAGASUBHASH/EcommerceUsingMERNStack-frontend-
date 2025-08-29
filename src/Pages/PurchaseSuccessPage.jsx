@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle, HandHeart } from "lucide-react";
+import { ArrowRight, CheckCircle, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useCartStore from "../Store/UseCartStore.js";
