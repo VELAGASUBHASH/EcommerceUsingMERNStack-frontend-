@@ -3,7 +3,7 @@ import axios from "axios";
 const axiosInstance = axios.create({
   baseURL: "https://ecommerceusingmernstack-backend.onrender.com",
   withCredentials: true,
-  headers: { "Content-Type": "application/json" },
+  headers: { "Content-Type": "application/json" }
 });
 
 axiosInstance.interceptors.response.use(
@@ -11,11 +11,7 @@ axiosInstance.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
-    if (
-      error.response &&
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         await axiosInstance.post("/auth/refresh-token", {}, { withCredentials: true });
