@@ -7,19 +7,25 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
+  response => response,
+  async error => {
     const originalRequest = error.config;
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
       try {
-        await axiosInstance.post("/auth/refresh-token");
+        await axiosInstance.post("/auth/refresh-token", {}, { withCredentials: true });
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   }
 );
