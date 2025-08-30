@@ -18,7 +18,7 @@ const HomePage = () => {
   const { fetchFeatutedProducts, products } = UseProductStore();
 
   // State for popup
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     fetchFeatutedProducts();
@@ -36,6 +36,19 @@ const HomePage = () => {
     fetchImages();
   }, []);
 
+
+  useEffect(() => {
+    const popupDismissed = sessionStorage.getItem("paymentPopupDismissed");
+    if (!popupDismissed) {
+      setShowPopup(true);
+    }
+  }, []);
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    sessionStorage.setItem("paymentPopupDismissed", "true"); 
+  };
+
   return (
     <div className="bg-[#f5f5f7] text-gray-900 min-h-screen font-sans">
       {/* Popup Notification */}
@@ -46,12 +59,12 @@ const HomePage = () => {
               ⚠️ Payment System Notice
             </h2>
             <p className="text-gray-700 mb-4">
-              Payment success is currently <span className="font-bold">not working</span> and is under maintenance.  
+              Payment success Page is currently <span className="font-bold">not working</span> and is under maintenance.  
               We’ll sort this out shortly.  
               If you have an issue, please contact support in the chatbot below.
             </p>
             <button
-              onClick={() => setShowPopup(false)}
+              onClick={handleClosePopup}
               className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
             >
               Close
